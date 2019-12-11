@@ -12,27 +12,25 @@ namespace TestOnGit
         static void Main(string[] args)
         {
             DataTable newDataTable = new DataTable();
-            newDataTable.Columns.Add("PapaID", typeof(int));
             newDataTable.Columns.Add("ID", typeof(int));
             newDataTable.Columns.Add("Name", typeof(string));
 
             DataRow dr = newDataTable.NewRow();
             dr[0] = 0;
-            dr[1] = 0;
-            dr[2] = "--All--";
+            dr[1] = "--All--";
             newDataTable.Rows.Add(dr);
+            DataRow dr1 = newDataTable.NewRow();
+            dr1[0] = 1;
+            dr1[1] = "One Val";
+            newDataTable.Rows.Add(dr1);
+            DataRow dr2 = newDataTable.NewRow();
+            dr2[0] = 2;
+            dr2[1] = "Two Val";
+            newDataTable.Rows.Add(dr1);
 
-            for (int i = 1; i < 3; i++)
-            {
-                DataRow dr1 = newDataTable.NewRow();
-                dr1[0] = i;
-                dr1[1] = i;
-                dr1[2] = i + " Val";
-                newDataTable.Rows.Add(dr1);
-            }
 
             var query = from r in newDataTable.AsEnumerable()
-                        where r.Field<int>("PapaID") == 0 //|| r.Field<string>("Name") == "bar"
+                        where r.Field<int>("ID") == 0 || r.Field<string>("Name") == "bar"
                         let objectArray = new object[]
                         {
                 r.Field<string>("c_to"), r.Field<string>("p_to")
